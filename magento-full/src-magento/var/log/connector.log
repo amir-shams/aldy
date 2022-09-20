@@ -1,0 +1,8 @@
+[2022-09-12 16:17:14] dotdigital.INFO: ERROR Creditmemo Order not found :2, quote id : 2, store id 1 [] []
+[2022-09-12 16:17:15] dotdigital.DEBUG: Dotdigitalgroup_Email data installer {"type":"Dotdigitalgroup\\Email\\Setup\\Install\\Type\\InsertEmailContactTableCustomers","rows_affected":1} []
+[2022-09-12 16:17:15] dotdigital.DEBUG: Dotdigitalgroup_Email data installer {"type":"Dotdigitalgroup\\Email\\Setup\\Install\\Type\\InsertEmailContactTableSubscribers","rows_affected":0} []
+[2022-09-12 16:17:15] dotdigital.DEBUG: Dotdigitalgroup_Email data installer {"type":"Dotdigitalgroup\\Email\\Setup\\Install\\Type\\UpdateContactsWithSubscriberCustomers","rows_affected":0} []
+[2022-09-12 16:17:15] dotdigital.DEBUG: Dotdigitalgroup_Email data installer {"type":"Dotdigitalgroup\\Email\\Setup\\Install\\Type\\InsertEmailOrderTable","rows_affected":2} []
+[2022-09-12 16:17:15] dotdigital.DEBUG: Dotdigitalgroup_Email data installer {"type":"Dotdigitalgroup\\Email\\Setup\\Install\\Type\\InsertEmailReviewTable","rows_affected":0} []
+[2022-09-12 16:17:15] dotdigital.DEBUG: Dotdigitalgroup_Email data installer {"type":"Dotdigitalgroup\\Email\\Setup\\Install\\Type\\InsertEmailWishlistTable","rows_affected":0} []
+[2022-09-12 16:17:15] dotdigital.DEBUG: Dotdigitalgroup_Email data installer {"type":"Dotdigitalgroup\\Email\\Setup\\Install\\Type\\InsertEmailCatalogTable","rows_affected":2040} []

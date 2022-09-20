@@ -1,0 +1,2 @@
+[2022-09-13 09:05:34] main.ERROR: Unable to send mail: Unknown error {"exception":"[object] (Laminas\\Mail\\Transport\\Exception\\RuntimeException(code: 0): Unable to send mail: Unknown error at /var/www/html/vendor/laminas/laminas-mail/src/Transport/Sendmail.php:298)"} []
+[2022-09-13 09:05:34] main.CRITICAL: Unable to send mail. Please try again later. {"exception":"[object] (Magento\\Framework\\Exception\\MailException(code: 0): Unable to send mail. Please try again later. at /var/www/html/vendor/magento/module-email/Model/Transport.php:114)"} []

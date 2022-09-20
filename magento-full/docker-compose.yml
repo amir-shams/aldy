@@ -1,0 +1,93 @@
+version: '2'
+services:
+  web:
+    image: magento:1
+    user: root 
+    restart: always
+    container_name: web
+    ports:
+      - '443:443'
+      - '80:80'
+    volumes:
+      # - ./magento_data/pub/media/:/var/www/html/pub/media
+      # - ./magento_data/vendor:/var/www/html/vendor
+      # - ./magento_data/log/:/var/www/html/var/log/
+      - ./vhost.conf:/etc/apache2/sites-enabled/000-default.conf 
+      - ./php.ini:/etc/php/7.4/cli/php.ini
+      - ./php.ini:/etc/php/7.4/apache2/php.ini
+      # - ./env.php:/var/www/html/app/etc/env.php
+      # - ./magento_data/auth.json:/var/www/html/auth.json
+      # - ./ssl/p.key:/etc/p.key
+      # - ./ssl/fullchain.pem:/etc/fullchain.pem
+      # - ./init.sh:/var/www/html/init.sh
+      # - ./admin.sh:/var/www/html/admin.sh
+      - ./src-magento/:/var/www/html
+      - ./env.php:/var/www/html/app/etc/env.php
+      - ./init.sh:/var/www/html/init.sh
+      # - ./composer.json:/var/www/html/composer.json
+      - /etc/localtime:/etc/localtime:ro
+      - ./data-magento:/var/www/html/data-magento
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+    depends_on:
+      - elk
+  # ssh_backend:
+  #   image: reg.local:7077/base/ssh
+  #   restart: always
+  #   container_name: ssh_backend
+  #   ports: 
+  #     - '9022:22'
+  #   volumes:
+  #     - ./magento_data/log/:/var/www/html/
+  #     - ./ssh/shadow:/etc/shadow
+  #     - /etc/localtime:/etc/localtime:ro
+  elk:
+    restart: always
+    container_name: elk
+    image: elasticsearch:7.4.0
+    environment:
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - network.host=0.0.0.0
+    #volumes:
+            #  - './elasticsearch_data:/bitnami/elasticsearch/data'
+  mysql:
+     image: percona/percona-server:8.0
+     container_name: mysql
+     volumes:
+       - ./mysql-data:/var/lib/mysql
+     restart: always
+     ports:
+       - "3309:3306"
+     env_file:
+       - env/mysql.env
+  rmq:
+    image: rabbitmq 
+    container_name: rmq
+    restart: always
+    ports:
+      - '4369:4369'
+      - '5551:5551'
+      - '5552:5552'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_LOGS=-
+      - RABBITMQ_SECURE_PASSWORD=yes
+        #- RABBITMQ_VHOST=/
+      - RABBITMQ_USERNAME=root
+      - RABBITMQ_PASSWORD=abcd1234
+      - RABBITMQ_FORCE_BOOT=yes
+    # volumes:
+      # - ./rabbitmq_data:/bitnami/rabbitmq/mnesia
+  redis:
+    image: redis
+    container_name: redis
+    restart: always
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+     # - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
