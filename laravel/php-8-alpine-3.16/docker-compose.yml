@@ -1,0 +1,19 @@
+version: !!str 3
+
+services:
+  web:
+    image: laravel8:2
+    container_name: web
+    volumes:
+      - ./volumes:/var/www/html/
+      - ./start-service.sh:/var/www/html/start.sh
+    ports:
+      - 8001:8000
+      - 8080:80
+  db:
+    image: mysql:8.0
+    container_name: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=abcd1234
+    ports:
+      - 3306:3306
